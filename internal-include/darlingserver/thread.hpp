@@ -33,7 +33,17 @@
 #include <darlingserver/logging.hpp>
 #include <darlingserver/stack-pool.hpp>
 
+#if defined (__ANDROID__)
+extern "C" {
+#include <libucontext/libucontext.h>
+}
+#define getcontext libucontext_getcontext
+#define makecontext libucontext_makecontext
+#define setcontext libucontext_setcontext
+#define swapcontext libucontext_swapcontext
+#else
 #include <ucontext.h>
+#endif
 
 struct DTapeHooks;
 

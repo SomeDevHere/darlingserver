@@ -3,6 +3,7 @@
 
 #include <darlingserver/monitor.hpp>
 #include <sstream>
+#include <vector>
 
 namespace DarlingServer {
 	/**

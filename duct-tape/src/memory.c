@@ -48,7 +48,11 @@ int ftruncate(int fd, off_t length);
 
 #define MAP_FAILED ((void*)-1)
 
+#if defined(__ANDROID__)
+#define _SC_PAGESIZE 0x27
+#else
 #define _SC_PAGESIZE 30
+#endif
 
 #define MFD_CLOEXEC 0x1
 
