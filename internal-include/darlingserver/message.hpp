@@ -28,6 +28,8 @@
 #include <mutex>
 #include <optional>
 #include <functional>
+#include <array>
+
 
 namespace DarlingServer {
 	class Address {
