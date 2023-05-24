@@ -149,7 +149,11 @@ struct DTapeHooks {
 	};
 
 	static dtape_thread_t* dtape_hook_thread_create_kernel(void) {
+#if defined(__ANDROID__)
+		auto thread = std::shared_ptr<DarlingServer::Thread>(new DarlingServer::Thread(DarlingServer::Thread::KernelThreadConstructorTag()));
+#else
 		auto thread = std::make_shared<DarlingServer::Thread>(DarlingServer::Thread::KernelThreadConstructorTag());
+#endif
 		thread->registerWithProcess();
 		DarlingServer::threadRegistry().registerEntry(thread, true);
 		return thread->_dtapeThread;

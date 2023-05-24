@@ -184,6 +184,11 @@ typedef struct {
 
 #define KOBJ_IDX_NOT_SET (-1)
 
+#if defined(__ANDROID__)
+#define bcmp memcmp
+#endif
+
+
 #ifndef max
 #define max(a, b)        (((a) > (b)) ? (a) : (b))
 #endif /* max */

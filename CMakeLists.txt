@@ -1,4 +1,5 @@
 project(darlingserver)
+include(darling_native_exe)
 
 cmake_minimum_required(VERSION 3.13)
 
@@ -100,7 +101,7 @@ add_custom_target(generate_dserver_rpc_wrappers
 		${CMAKE_CURRENT_BINARY_DIR}/src/rpc.c
 )
 
-add_executable(darlingserver
+add_darling_native_executable(darlingserver
 	src/darlingserver.cpp
 	src/server.cpp
 	src/message.cpp

@@ -849,7 +849,11 @@ void DarlingServer::Thread::kernelAsync(std::function<void()> fn) {
 		// we need to get some work done, but there are no workers available.
 		// if we have less workers than the max permanent number of workers,
 		// let's spawn a permanent worker. otherwise, just spawn a temporary worker.
+#if defined(__ANDROID__)
+		auto thread = std::shared_ptr<Thread>(new Thread(KernelThreadConstructorTag()));
+#else
 		auto thread = std::make_shared<Thread>(KernelThreadConstructorTag());
+#endif
 		auto permanent = permanentKernelAsyncRunners.size() < MAX_PERMANENT_KERNEL_RUNNERS;
 		thread->startKernelThread(std::bind(kernelAsyncRunnerThreadWorker, permanent, thread));
 		if (permanent) {

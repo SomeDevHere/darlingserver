@@ -98,7 +98,11 @@ std::shared_ptr<DarlingServer::Call> DarlingServer::Call::callFromMessage(Messag
 			}
 
 			try {
+#if defined(__ANDROID__)
+				tmp = std::shared_ptr<Thread>(new Thread(process, header->tid, stackHint));
+#else
 				tmp = std::make_shared<Thread>(process, header->tid, stackHint);
+#endif
 			} catch (std::system_error e) {
 				return tmp;
 			}

@@ -25,8 +25,13 @@ int sysinfo(struct sysinfo *info);
 
 // Linux sysconf
 long sysconf(int name);
+#if defined(__ANDROID__)
+#define _SC_NPROCESSORS_CONF 0x60
+#define _SC_NPROCESSORS_ONLN 0x61
+#else
 #define _SC_NPROCESSORS_CONF 83
 #define _SC_NPROCESSORS_ONLN 84
+#endif
 
 static void cache_sysinfo(void* context) {
 	struct sysinfo* cached_sysinfo = context;
