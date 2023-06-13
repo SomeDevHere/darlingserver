@@ -741,6 +741,13 @@ int main(int argc, char** argv) {
 
 		spawnLaunchd(prefix);
 		__builtin_unreachable();
+#if defined(__ANDROID__)
+	} else {
+		auto tmp = (std::string(prefix) + "/.launchd.pid");
+		FILE* f = fopen(tmp.c_str(), "w");
+		fprintf(f, "%d", launchdGlobalPID);
+		fclose(f);
+#endif
 	}
 
 	// this is the parent
